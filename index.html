@@ -1,7 +1,57 @@
-<html>
-  <head>
-  </head>
-  <body>
-    <h1>Hello world</h1>
-  </body>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Making your first Phaser 3 Game - Part 2</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    var config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
+        }
+    };
+
+    var game = new Phaser.Game(config);
+
+    function preload ()
+    {
+        this.load.image('space1', 'assets/space1.png');
+        this.load.image('title', 'assets/title.png');
+        this.load.image('start', 'assets/start.png');
+    }
+
+    function create ()
+    {
+      // Title screen
+      this.add.image(400, 300, 'space1');
+      this.add.image(400, 200, 'title');
+      this.button = this.add.sprite(400, 400, 'start').setInteractive();
+      this.button.on('pointerover', function(){this.button.setTint(0xf0ff00);}, this)
+      this.button.on('pointerout', function(){this.button.setTint(0xffffff);}, this)
+      this.button.on('pointerdown', function(){
+                  //do things on click
+      });
+    }
+
+    function update ()
+    {
+    }
+
+</script>
+
+</body>
 </html>
