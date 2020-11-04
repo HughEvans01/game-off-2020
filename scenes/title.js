@@ -5,9 +5,9 @@ var Title = new Phaser.Class({
     },
     init: function() {},
     preload: function() {
-      this.load.image('space1', '/../assets/space1.png');
-      this.load.image('title', '/../assets/title.png');
-      this.load.image('start', '/../assets/start.png');
+      this.load.image('space1', './assets/space1.png');
+      this.load.image('title', './assets/title.png');
+      this.load.image('start', './assets/start.png');
     },
     create: function() {
       this.add.image(400, 300, 'space1');

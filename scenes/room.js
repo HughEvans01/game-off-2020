@@ -5,12 +5,12 @@ var Room = new Phaser.Class({
     },
     init: function() {},
     preload: function() {
-      this.load.image('noon', '/../assets/noon.png');
-      this.load.image('conferenceRoom', '/../assets/conferenceRoom.png');
-      this.load.image('lincoln1', '/../assets/lincoln1.png');
-      this.load.image('speechBubble1', '/../assets/speechBubble1.png');
-      this.load.image('speechBubble2', '/../assets/speechBubble2.png');
-      this.load.image('mapIcon', '/../assets/mapIcon.png');
+      this.load.image('noon', './assets/noon.png');
+      this.load.image('conferenceRoom', './assets/conferenceRoom.png');
+      this.load.image('lincoln1', './assets/lincoln1.png');
+      this.load.image('speechBubble1', './assets/speechBubble1.png');
+      this.load.image('speechBubble2', './assets/speechBubble2.png');
+      this.load.image('mapIcon', './assets/mapIcon.png');
     },
     create: function() {
       this.story = [{message:"Welcome to Moonshot Inc. I'm Lincoln Rust the CEO\nand owner. How was your journey in?",options:[{text:"My journey was fine, thanks.",link:1},{text:"I was attacked\nby a swarm of bees.",link:1}]},
@@ -21,7 +21,7 @@ var Room = new Phaser.Class({
                    {message:'Some of our "interns" broke lose and overan the\ngrounds. Select a location on your map to travel there.',options:[{text:"Got it",link:6},{text:"Interns?",link:7}]},
                    {message:"Feel free to explore and meet your new colleagues\njust make sure you get that engine debugged by Friday!",options:[{text:"I won't let\nyou down!",link:-1},{text:"I'm still\nconfused",link:-1}]},
                    {message:"Ah that reminds me, stay out of the containment area\nin the R&D block. I don't want to replace another dev." ,options:[{text:"Replace another-",link:6},{text:"You didn't-",link:6}]},
-                   {message:"Message2",options:[{text:"A",link:-1},{text:"B",link:-1}]},];
+                   {message:"Message2",options:[{text:"A",link:-1},{text:"B",link:-1}]}];
 
       this.messageText;
       this.optionText1;
