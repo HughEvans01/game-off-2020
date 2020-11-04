@@ -1,7 +1,7 @@
 var Title = new Phaser.Class({
     Extends: Phaser.Scene,
     initialize: function() {
-        Phaser.Scene.call(this, { "key": "Title" });
+        Phaser.Scene.call(this, { 'key': 'Title' });
     },
     init: function() {},
     preload: function() {
@@ -16,7 +16,7 @@ var Title = new Phaser.Class({
       this.button.on('pointerover', function(){this.button.setTint(0xf0ff00);}, this)
       this.button.on('pointerout', function(){this.button.setTint(0xffffff);}, this)
       this.button.on('pointerdown', function(){
-        this.scene.start("Intro");
+        this.scene.start("Room");
       }, this);
     },
     update: function() {}
