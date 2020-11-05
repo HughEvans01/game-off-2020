@@ -3,10 +3,17 @@ var Room = new Phaser.Class({
     initialize: function() {
         Phaser.Scene.call(this, { 'key': 'Room' });
     },
-    init: function() {},
+    init: function(data) {
+      this.currentRoom = data.currentRoom;
+    },
     preload: function() {
       this.load.image('noon', './assets/noon.png');
       this.load.image('conferenceRoom', './assets/conferenceRoom.png');
+      this.load.image('storageRoom', './assets/storageRoom.png');
+      this.load.image('labRoom', './assets/labRoom.png');
+      this.load.image('containment', './assets/containment.png');
+      this.load.image('observatory', './assets/observatory.png');
+      this.load.image('workshop', './assets/workshop.png');
       this.load.image('lincoln1', './assets/lincoln1.png');
       this.load.image('speechBubble1', './assets/speechBubble1.png');
       this.load.image('speechBubble2', './assets/speechBubble2.png');
@@ -30,7 +37,7 @@ var Room = new Phaser.Class({
       this.storyIndex = 0;
 
       this.add.image(400, 300, 'noon');
-      this.add.image(400, 300, 'conferenceRoom');
+      this.add.image(400, 300, this.currentRoom);
       this.add.image(400, 410, 'lincoln1');
       this.message = this.add.image(400, 50, 'speechBubble1');
 
@@ -38,7 +45,7 @@ var Room = new Phaser.Class({
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
       this.map.on('pointerout', function(){this.map.setTint(0xffffff);}, this)
       this.map.on('pointerdown', function(){
-        this.scene.start("Map");
+        this.scene.start("Map",{"currentRoom": this.currentRoom});
       }, this);
       this.map.visible = false;
 
