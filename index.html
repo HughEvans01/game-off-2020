@@ -6,6 +6,7 @@
     <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <script src="scenes/title.js"></script>
     <script src="scenes/room.js"></script>
+    <script src="scenes/map.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -23,7 +24,7 @@
     parent: "game",
     width: 800,
     height: 600,
-    scene: [ Title, Room ]
+    scene: [ Title, Room, Map ]
   };
 
   const game = new Phaser.Game(phaserConfig);

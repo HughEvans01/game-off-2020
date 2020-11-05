@@ -38,7 +38,7 @@ var Room = new Phaser.Class({
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
       this.map.on('pointerout', function(){this.map.setTint(0xffffff);}, this)
       this.map.on('pointerdown', function(){
-        this.nextDialogue(0);
+        this.scene.start("Map");
       }, this);
       this.map.visible = false;
 
