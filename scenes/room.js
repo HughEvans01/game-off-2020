@@ -5,6 +5,7 @@ var Room = new Phaser.Class({
     },
     init: function(data) {
       this.currentRoom = data.currentRoom;
+      this.character= data.character;
     },
     preload: function() {
       this.load.image('noon', './assets/noon.png');
@@ -15,6 +16,11 @@ var Room = new Phaser.Class({
       this.load.image('observatory', './assets/observatory.png');
       this.load.image('workshop', './assets/workshop.png');
       this.load.image('lincoln1', './assets/lincoln1.png');
+      this.load.image('bort1', './assets/bort1.png');
+      this.load.image('alien1', './assets/alien1.png');
+      this.load.image('susan1', './assets/susan1.png');
+      this.load.image('marjot1', './assets/marjot1.png');
+      this.load.image('astronaut1', './assets/astronaut1.png');
       this.load.image('speechBubble1', './assets/speechBubble1.png');
       this.load.image('speechBubble2', './assets/speechBubble2.png');
       this.load.image('mapIcon', './assets/mapIcon.png');
@@ -38,7 +44,7 @@ var Room = new Phaser.Class({
 
       this.add.image(400, 300, 'noon');
       this.add.image(400, 300, this.currentRoom);
-      this.add.image(400, 410, 'lincoln1');
+      this.add.image(400, 425, this.character);
       this.message = this.add.image(400, 50, 'speechBubble1');
 
       this.map = this.add.sprite(750, 550, 'mapIcon').setInteractive();
