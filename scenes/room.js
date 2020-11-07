@@ -32,7 +32,7 @@ var Room = new Phaser.Class({
       this.load.image('clock', './assets/clock.png');
     },
     create: function() {
-      this.story = {"monday":{"09:00":{
+      this.story = {"Monday":{"09:00":{
                     "conferenceRoom":{character:"lincoln1",dialogue:[{message:"Welcome to Moonshot Inc. I'm Lincoln Rust the CEO\nand owner. How was your journey in?",options:[{text:"My journey was fine, thanks.",link:1},{text:"I was attacked\nby a swarm of bees.",link:1}]},
                                                                      {message:"Awesome. Would you like me to give you a quick rundown\nof your new role here?",options:[{text:"No [SKIP TUTORIAL]",link:-1},{text:"Sure",link:2}]},
                                                                      {message:"We need the code for our new rocket debugged before\nthe launch test on Friday: that's where you come in.",options:[{text:"Got it",link:4},{text:"Bugs?",link:3}]},
@@ -64,7 +64,7 @@ var Room = new Phaser.Class({
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
       this.map.on('pointerout', function(){this.map.setTint(0xffffff);}, this)
       this.map.on('pointerdown', function(){
-        this.scene.start("Map",{day:"monday",time:"09:00",room:this.room});
+        this.scene.start("Map",{day:this.day,time:this.time,room:this.room});
       }, this);
       this.map.visible = false;
 
@@ -104,7 +104,6 @@ var Room = new Phaser.Class({
       } else {
         // If there is no valid dialogue at the next index end the conversation
         this.map.visible = true;
-        this.timeText.visible = true;
         this.message.visible = false;
         this.messageText.visible = false;
         this.option1.visible = false;
