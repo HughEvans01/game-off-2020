@@ -41,7 +41,7 @@ var Map = new Phaser.Class({
         this.rooms[nextRoom].on('pointerover', function(){this.rooms[nextRoom].setTint(0xff8f00);}, this)
         this.rooms[nextRoom].on('pointerout', function(){this.rooms[nextRoom].setTint(0xffffff);}, this)
         this.rooms[nextRoom].on('pointerdown', function(){
-          this.scene.start("Room",{"day":day,"time":time,"room":nextRoom});
+          this.scene.start("Loading",{"day":day,"time":time,"room":nextRoom});
         }, this);
       }
     },
