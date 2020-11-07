@@ -69,7 +69,7 @@ var Room = new Phaser.Class({
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
       this.map.on('pointerout', function(){this.map.setTint(0xffffff);}, this)
       this.map.on('pointerdown', function(){
-        this.scene.start("Map",{day:"monday",time:"09:00",room:"conferenceRoom"});
+        this.scene.start("Map",{day:"monday",time:"09:00",room:this.room});
       }, this);
       this.map.visible = false;
 

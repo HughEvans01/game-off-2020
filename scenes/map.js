@@ -33,15 +33,15 @@ var Map = new Phaser.Class({
       this.createButton(667,196,'serversIcon',this.day,this.time,'serverRoom') //This will need to change when I add the debugging game
 
     },
-    createButton(x,y,icon,day,time,room) {
-      if (this.currentRoom===room) {
-        this.rooms[room] = this.add.sprite(x, y, 'hereIcon').setInteractive();
+    createButton(x,y,icon,day,time,nextRoom) {
+      if (this.room===nextRoom) {
+        this.rooms[nextRoom] = this.add.sprite(x, y, 'hereIcon').setInteractive();
       } else {
-        this.rooms[room] = this.add.sprite(x, y, icon).setInteractive();
-        this.rooms[room].on('pointerover', function(){this.rooms[room].setTint(0xff8f00);}, this)
-        this.rooms[room].on('pointerout', function(){this.rooms[room].setTint(0xffffff);}, this)
-        this.rooms[room].on('pointerdown', function(){
-          this.scene.start("Room",{"day":day,"time":time,"room":room});
+        this.rooms[nextRoom] = this.add.sprite(x, y, icon).setInteractive();
+        this.rooms[nextRoom].on('pointerover', function(){this.rooms[nextRoom].setTint(0xff8f00);}, this)
+        this.rooms[nextRoom].on('pointerout', function(){this.rooms[nextRoom].setTint(0xffffff);}, this)
+        this.rooms[nextRoom].on('pointerdown', function(){
+          this.scene.start("Room",{"day":day,"time":time,"room":nextRoom});
         }, this);
       }
     },
