@@ -60,11 +60,6 @@ var Room = new Phaser.Class({
       this.add.image(400, 300, this.room);
       this.add.image(400, 425, this.character);
 
-      this.clock = this.add.image(750, 50, 'clock');
-      this.timeText = this.add.text(705, 35, this.time, { fontSize: '30px', fill: '#ffffff' });
-      this.clock.visible = false;
-      this.timeText.visible = false;
-
       this.map = this.add.sprite(750, 550, 'mapIcon').setInteractive();
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
       this.map.on('pointerout', function(){this.map.setTint(0xffffff);}, this)
@@ -109,7 +104,6 @@ var Room = new Phaser.Class({
       } else {
         // If there is no valid dialogue at the next index end the conversation
         this.map.visible = true;
-        this.clock.visible = true;
         this.timeText.visible = true;
         this.message.visible = false;
         this.messageText.visible = false;
