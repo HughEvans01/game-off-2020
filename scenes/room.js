@@ -5,25 +5,31 @@ var Room = new Phaser.Class({
     },
     init: function(data) {
       this.currentRoom = data.currentRoom;
-      this.character= data.character;
+      this.character = data.character;
+      this.link = data.link;
     },
     preload: function() {
       this.load.image('noon', './assets/noon.png');
+
       this.load.image('conferenceRoom', './assets/conferenceRoom.png');
       this.load.image('storageRoom', './assets/storageRoom.png');
       this.load.image('labRoom', './assets/labRoom.png');
       this.load.image('containment', './assets/containment.png');
       this.load.image('observatory', './assets/observatory.png');
       this.load.image('workshop', './assets/workshop.png');
+
       this.load.image('lincoln1', './assets/lincoln1.png');
       this.load.image('bort1', './assets/bort1.png');
       this.load.image('alien1', './assets/alien1.png');
       this.load.image('susan1', './assets/susan1.png');
       this.load.image('marjot1', './assets/marjot1.png');
       this.load.image('astronaut1', './assets/astronaut1.png');
+
       this.load.image('speechBubble1', './assets/speechBubble1.png');
       this.load.image('speechBubble2', './assets/speechBubble2.png');
+
       this.load.image('mapIcon', './assets/mapIcon.png');
+      this.load.image('clock', './assets/clock.png');
     },
     create: function() {
       this.story = [{message:"Welcome to Moonshot Inc. I'm Lincoln Rust the CEO\nand owner. How was your journey in?",options:[{text:"My journey was fine, thanks.",link:1},{text:"I was attacked\nby a swarm of bees.",link:1}]},
@@ -40,12 +46,16 @@ var Room = new Phaser.Class({
       this.optionText1;
       this.optionText2;
 
-      this.storyIndex = 0;
+      this.storyIndex = this.link;
 
       this.add.image(400, 300, 'noon');
       this.add.image(400, 300, this.currentRoom);
       this.add.image(400, 425, this.character);
-      this.message = this.add.image(400, 50, 'speechBubble1');
+
+      this.clock = this.add.image(750, 50, 'clock');
+      this.timeText = this.add.text(705, 35, '00:00', { fontSize: '30px', fill: '#ffffff' });
+      this.clock.visible = false;
+      this.timeText.visible = false;
 
       this.map = this.add.sprite(750, 550, 'mapIcon').setInteractive();
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
@@ -54,6 +64,8 @@ var Room = new Phaser.Class({
         this.scene.start("Map",{"currentRoom": this.currentRoom});
       }, this);
       this.map.visible = false;
+
+      this.message = this.add.image(400, 50, 'speechBubble1');
 
       this.option1 = this.add.sprite(200, 150, 'speechBubble2').setInteractive();
       this.option1.on('pointerover', function(){this.option1.setTint(0xff8f00);}, this)
@@ -89,6 +101,8 @@ var Room = new Phaser.Class({
       } else {
         // If there is no valid dialogue at the next index end the conversation
         this.map.visible = true;
+        this.clock.visible = true;
+        this.timeText.visible = true;
         this.message.visible = false;
         this.messageText.visible = false;
         this.option1.visible = false;

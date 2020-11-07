@@ -23,16 +23,16 @@ var Map = new Phaser.Class({
     create: function() {
       this.add.image(400, 300, 'mapScreen');
 
-      this.createButton(127,390,'boxIcon','storageRoom','bort1')
-      this.createButton(567,198,'ceoIcon','conferenceRoom','lincoln1')
-      this.createButton(140,120,'labIcon','labRoom','marjot1')
-      this.createButton(155,222,'scpIcon','containment','alien1')
-      this.createButton(340,150,'telescopeIcon','observatory','astronaut1')
-      this.createButton(255,435,'workshopIcon','workshop','susan1')
-      this.createButton(667,196,'serversIcon','serverRoom','foo') //This will need to change when I add the debugging game
+      this.createButton(127,390,'boxIcon','storageRoom','bort1',0)
+      this.createButton(567,198,'ceoIcon','conferenceRoom','lincoln1',0)
+      this.createButton(140,120,'labIcon','labRoom','marjot1',0)
+      this.createButton(155,222,'scpIcon','containment','alien1',0)
+      this.createButton(340,150,'telescopeIcon','observatory','astronaut1',0)
+      this.createButton(255,435,'workshopIcon','workshop','susan1',0)
+      this.createButton(667,196,'serversIcon','serverRoom','foo',0) //This will need to change when I add the debugging game
 
     },
-    createButton(x,y,icon,room,character) {
+    createButton(x,y,icon,room,character,link) {
       if (this.currentRoom===room) {
         this.rooms[room] = this.add.sprite(x, y, 'hereIcon').setInteractive();
       } else {
@@ -40,7 +40,7 @@ var Map = new Phaser.Class({
         this.rooms[room].on('pointerover', function(){this.rooms[room].setTint(0xff8f00);}, this)
         this.rooms[room].on('pointerout', function(){this.rooms[room].setTint(0xffffff);}, this)
         this.rooms[room].on('pointerdown', function(){
-          this.scene.start("Room",{"currentRoom": room,"character":character});
+          this.scene.start("Room",{"currentRoom": room,"character":character,"link":link});
         }, this);
       }
     },
