@@ -30,7 +30,13 @@ var Map = new Phaser.Class({
       this.createButton(155,222,'scpIcon',this.day,this.time,'containment')
       this.createButton(340,150,'telescopeIcon',this.day,this.time,'observatory')
       this.createButton(255,435,'workshopIcon',this.day,this.time,'workshop')
-      this.createButton(667,196,'serversIcon',this.day,this.time,'serverRoom') //This will need to change when I add the debugging game
+
+      this.serverRoom = this.add.sprite(667,196,'serversIcon').setInteractive();
+      this.serverRoom.on('pointerover', function(){this.serverRoom.setTint(0xff8f00);}, this)
+      this.serverRoom.on('pointerout', function(){this.serverRoom.setTint(0xffffff);}, this)
+      this.serverRoom.on('pointerdown', function(){
+        this.scene.start("Loading",{"day":this.day,"time":this.time,"room":'serverRoom'});
+      }, this);
 
     },
     createButton(x,y,icon,day,time,nextRoom) {

@@ -14,8 +14,11 @@ var Loading = new Phaser.Class({
       this.add.text(200, 200, this.day, { fontSize: '100px', fill: '#ffffff' });
       this.add.text(300, 300, this.time, { fontSize: '60px', fill: '#ffffff' });
 
-      setTimeout(() => {  this.scene.start("Room",{day:this.day,time:this.time,room:this.room}); }, 2000);
-
+      if (this.room === 'serverRoom') {
+          setTimeout(() => {  this.scene.start("Minigame",{day:this.day,time:this.time,room:this.room}); }, 2000);
+      } else {
+          setTimeout(() => {  this.scene.start("Room",{day:this.day,time:this.time,room:this.room}); }, 2000);
+      }
     },
     update: function() {}
 });

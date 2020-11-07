@@ -29,7 +29,6 @@ var Room = new Phaser.Class({
       this.load.image('speechBubble2', './assets/speechBubble2.png');
 
       this.load.image('mapIcon', './assets/mapIcon.png');
-      this.load.image('clock', './assets/clock.png');
     },
     create: function() {
       this.story = {"Monday":{"09:00":{
