@@ -38,11 +38,12 @@ var Map = new Phaser.Class({
         this.rooms[nextRoom] = this.add.sprite(x, y, 'hereIcon').setInteractive();
       } else {
         if (nextRoom === 'serverRoom') {
+          /* Server room button links to a different scene to the rest so
+          I implmented it differently, yes I know it is ugly */
           this.serverRoom = this.add.sprite(667,196,'serversIcon').setInteractive();
           this.serverRoom.on('pointerover', function(){this.serverRoom.setTint(0xff8f00);}, this)
           this.serverRoom.on('pointerout', function(){this.serverRoom.setTint(0xffffff);}, this)
           this.serverRoom.on('pointerdown', function(){
-            this.serverRoom = this.serverRoom.setTexture('hereIcon').setInteractive();
             this.scene.start("Loading",{"day":this.day,"time":this.time,"room":'serverRoom'});
           }, this);
         } else {
