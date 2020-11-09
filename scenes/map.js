@@ -30,25 +30,29 @@ var Map = new Phaser.Class({
       this.createButton(155,222,'scpIcon',this.day,this.time,'containment')
       this.createButton(340,150,'telescopeIcon',this.day,this.time,'observatory')
       this.createButton(255,435,'workshopIcon',this.day,this.time,'workshop')
-
-      this.serverRoom = this.add.sprite(667,196,'serversIcon').setInteractive();
-      this.serverRoom.on('pointerover', function(){this.serverRoom.setTint(0xff8f00);}, this)
-      this.serverRoom.on('pointerout', function(){this.serverRoom.setTint(0xffffff);}, this)
-      this.serverRoom.on('pointerdown', function(){
-        this.scene.start("Loading",{"day":this.day,"time":this.time,"room":'serverRoom'});
-      }, this);
+      this.createButton(667,196,'serversIcon',this.day,this.time,'serverRoom')
 
     },
     createButton(x,y,icon,day,time,nextRoom) {
       if (this.room===nextRoom) {
         this.rooms[nextRoom] = this.add.sprite(x, y, 'hereIcon').setInteractive();
       } else {
-        this.rooms[nextRoom] = this.add.sprite(x, y, icon).setInteractive();
-        this.rooms[nextRoom].on('pointerover', function(){this.rooms[nextRoom].setTint(0xff8f00);}, this)
-        this.rooms[nextRoom].on('pointerout', function(){this.rooms[nextRoom].setTint(0xffffff);}, this)
-        this.rooms[nextRoom].on('pointerdown', function(){
-          this.scene.start("Loading",{"day":day,"time":time,"room":nextRoom});
-        }, this);
+        if (nextRoom === 'serverRoom') {
+          this.serverRoom = this.add.sprite(667,196,'serversIcon').setInteractive();
+          this.serverRoom.on('pointerover', function(){this.serverRoom.setTint(0xff8f00);}, this)
+          this.serverRoom.on('pointerout', function(){this.serverRoom.setTint(0xffffff);}, this)
+          this.serverRoom.on('pointerdown', function(){
+            this.serverRoom = this.serverRoom.setTexture('hereIcon').setInteractive();
+            this.scene.start("Loading",{"day":this.day,"time":this.time,"room":'serverRoom'});
+          }, this);
+        } else {
+          this.rooms[nextRoom] = this.add.sprite(x, y, icon).setInteractive();
+          this.rooms[nextRoom].on('pointerover', function(){this.rooms[nextRoom].setTint(0xff8f00);}, this)
+          this.rooms[nextRoom].on('pointerout', function(){this.rooms[nextRoom].setTint(0xffffff);}, this)
+          this.rooms[nextRoom].on('pointerdown', function(){
+            this.scene.start("Loading",{"day":day,"time":time,"room":nextRoom});
+          }, this);
+        }
       }
     },
     update: function() {}
