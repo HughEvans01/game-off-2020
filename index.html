@@ -9,6 +9,7 @@
     <script src="scenes/map.js"></script>
     <script src="scenes/loading.js"></script>
     <script src="scenes/minigame.js"></script>
+    <script src="scenes/credits.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -26,7 +27,7 @@
     parent: "game",
     width: 800,
     height: 600,
-    scene: [ Title, Room, Map, Loading, Minigame ]
+    scene: [ Title, Room, Map, Loading, Minigame, Credits ]
   };
 
   const game = new Phaser.Game(phaserConfig);
