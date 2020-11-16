@@ -15,6 +15,7 @@ var Room = new Phaser.Class({
       this.load.image('storageRoom', './assets/storageRoom.png');
       this.load.image('labRoom', './assets/labRoom.png');
       this.load.image('containment', './assets/containment.png');
+      this.load.image('bars', './assets/bars.png');
       this.load.image('observatory', './assets/observatory.png');
       this.load.image('workshop', './assets/workshop.png');
 
@@ -39,13 +40,17 @@ var Room = new Phaser.Class({
       this.optionText1;
       this.optionText2;
 
-      this.dialogue = this.story[this.day][this.time][this.room].dialogue;
-      this.character = this.story[this.day][this.time][this.room].character;
-      this.storyIndex = 0;
+      this.dialogue = this.story[this.day][this.room].dialogue;
+      this.character = this.story[this.day][this.room].character;
+      this.storyIndex = this.story[this.day][this.room].entryPoint;
 
       this.add.image(400, 300, 'noon');
       this.add.image(400, 300, this.room);
       this.add.image(400, 425, this.character);
+
+      if (this.room === "containment") {
+        this.add.image(400,300, "bars")
+      }
 
       this.map = this.add.sprite(750, 550, 'mapIcon').setInteractive();
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
@@ -92,25 +97,37 @@ var Room = new Phaser.Class({
       this.optionText2.setText(this.dialogue[this.storyIndex].options[1].text);
     },
     update: function() {},
+    endConversation: function() {
+      // Hide all the conversation UI elements and show map button
+      this.map.visible = true;
+      this.message.visible = false;
+      this.messageText.visible = false;
+      this.option1.visible = false;
+      this.optionText1.visible = false;
+      this.option2.visible = false;
+      this.optionText2.visible = false;
+    },
     nextDialogue: function(option) {
+      /* Use the link attribute in the dialogue object to work out what to say
+      or do next: positive numbers link to the next dialogue object at that
+      index, negative numbers link to the next dialogue object at that next
+      but only the next time you talk to that character, and a null value ends
+      the conversation instantly. This could probably be done better */
       var nextIndex = this.dialogue[this.storyIndex].options[option].link;
 
-      if (nextIndex >= 0) {
-        // If there is a valid dialogue at the next index load it
+      if (nextIndex === null) {
+        this.endConversation();
+      } else if (Math.sign(nextIndex) > 0) {
+        // If there is a link to dialogue at the next index load it
         this.storyIndex = nextIndex;
         this.messageText.setText(this.dialogue[this.storyIndex].message);
         this.optionText1.setText(this.dialogue[this.storyIndex].options[0].text);
         this.optionText2.setText(this.dialogue[this.storyIndex].options[1].text);
-      } else {
-        // If there is no valid dialogue at the next index end the conversation
-        this.map.visible = true;
-        this.message.visible = false;
-        this.messageText.visible = false;
-        this.option1.visible = false;
-        this.optionText1.visible = false;
-        this.option2.visible = false;
-        this.optionText2.visible = false;
 
+      } else if (Math.sign(nextIndex) < 0) {
+        // If there is a new entry point at the next index load it
+        this.story[this.day][this.room].entryPoint = Math.abs(nextIndex);
+        this.endConversation();
       }
     }
 });
