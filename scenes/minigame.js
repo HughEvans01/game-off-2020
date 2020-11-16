@@ -35,8 +35,23 @@ var Minigame = new Phaser.Class({
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
       this.map.on('pointerout', function(){this.map.setTint(0xffffff);}, this)
       this.map.on('pointerdown', function(){
-        this.scene.start("Map",{day:this.day,time:this.currentTime,room:this.room});
+        this.updateTime(2);
       }, this);
+    },
+    updateTime: function(duration) {
+      // Ugly code to increment hour by one between scenes, do better?
+      var newHour = parseInt(this.currentTime.slice(0,2))+duration;
+      if (newHour > 17) {
+        // Do something at the end of the day
+        this.scene.start("Credits",{});
+      } else {
+        if (newHour < 10) {
+        // Pad single digits with a leading zero
+        newHour = "0" + newHour;
+        }
+      }
+      this.currentTime = newHour + ":00";
+      this.scene.start("Map",{day:this.day,time:this.currentTime,room:this.room});
     },
     // Setup game timers and win conditions
     startGame: function() {

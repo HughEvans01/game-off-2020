@@ -88,44 +88,150 @@
 		"storageRoom": {
 			"character": "bort1",
 			"entryPoint":0,
-			"dialogue": [{
-				"message": "Muh?",
+			"dialogue": [
+				{
+				"message": "Who are you and what are you doing in my warehouse?",
 				"options": [{
-					"text": "Hur",
+					"text": "Who are you?",
+					"link": 1
+				}, {
+					"text": "I'm the new debugger,\nI just came over to say hi.",
+					"link": 2
+					}]
+				},
+				{
+				"message": "I am Herbort Kowalczyk and I am the manager of this\ndepartment! I'll ask again, who are you? ",
+				"options": [{
+					"text": "I'm new here, sorry.\nJust taking a look around",
+					"link": -3
+				}, {
+					"text": "I'm the new debugger,\nI just came over to say hi.",
+					"link": -3
+					}]
+				},
+				{
+				"message": "My name is Hebort but everyone here calls me Bort. I am\n the manager of this department",
+				"options": [{
+					"text": "What is this department?",
+					"link": 4
+				}, {
+					"text": "Nice to meet you Bort.",
+					"link": -3
+					}]
+				},
+				{
+				"message": "Debugger comrade! Can I help you with anything?",
+				"options": [{
+					"text": "Just passing.",
 					"link": null
 				}, {
-					"text": "Dur",
+					"text": "Not today Bort.",
 					"link": null
-				}]
-			}]
+					}]
+				},
+				{
+				"message": "This is the storage department, here we store essential\nscomponents for rocket assembly.",
+				"options": [{
+					"text": "Makes sense.",
+					"link": -3
+				}, {
+					"text": "OK",
+					"link": -3
+					}]
+				}
+		]
 		},
 		"labRoom": {
 			"character": "marjot1",
 			"entryPoint":0,
-			"dialogue": [{
-				"message": "Muh?",
+			"dialogue": [
+				{
+				"message": "You must be the new debugger. The bugs didn't escape\nfrom this lab, that was just a rumor.",
 				"options": [{
-					"text": "Hur",
-					"link": null
+					"text": "Why do you have\nbugs in here?",
+					"link": 2
 				}, {
-					"text": "Dur",
-					"link": null
-				}]
-			}]
+					"text": "Uh OK?",
+					"link": 1
+					}]
+				},
+				{
+				"message": "My name's Marjot by the way. I'm the lead researcher\nworking on samples returned from our space missions.",
+				"options": [{
+					"text": "Samples?",
+					"link": 3
+				}, {
+					"text": "Cool",
+					"link": 4
+					}]
+				},
+				{
+				"message": "I have a colony of Isoptera, I love those little guys:\nthey're way more fun than an ant farm any day.",
+				"options": [{
+					"text": "Neat",
+					"link": 1
+				}, {
+					"text": "Gross",
+					"link": 1
+					}]
+				},
+				{
+				"message": "Lunar rocks, martian rocks, glowing rocks... you get\nthe idea. Oh, and the big guy next door in containment.",
+				"options": [{
+					"text": "Sounds like a lot of rocks",
+					"link": 4
+				}, {
+					"text": "Big guy-",
+					"link": 4
+					}]
+				},
+				{
+				"message": "Good luck with your debugging! I'd better get back to\nwork. Got a whole shipment of samples to process.",
+				"options": [{
+					"text": "Thanks",
+					"link": -4
+				}, {
+					"text": "See you later",
+					"link": -4
+					}]
+				}
+			]
 		},
 		"workshop": {
 			"character": "susan1",
 			"entryPoint":0,
-			"dialogue": [{
-				"message": "Muh?",
+			"dialogue": [
+				{
+				"message": "Oh hey you're that new dev! How's debugging going?\nAs you can see we're nearly ready for launch here.",
 				"options": [{
-					"text": "Hur",
-					"link": null
+					"text": "I'm... still\nlearning the ropes",
+					"link": 1
 				}, {
-					"text": "Dur",
-					"link": null
-				}]
-			}]
+					"text": "It's going great",
+					"link": 1
+					}]
+				},
+				{
+				"message": "My name Susan by the way. I'm the lead engineer\non Moonshot's latest generation of space craft.",
+				"options": [{
+					"text": "That's cool",
+					"link": -2
+				}, {
+					"text": "Nice to meet you Susan",
+					"link": -2
+					}]
+				},
+				{
+				"message": "Make sure you get that server debugged by Friday\nit's a critical part of the new engine test.",
+				"options": [{
+					"text": "Will do",
+					"link": -2
+				}, {
+					"text": "No problem",
+					"link": -2
+					}]
+				}
+		]
 		},
 		"containment": {
 			"character": "alien1",
@@ -133,10 +239,10 @@
 			"dialogue": [{
 				"message": "Muh?",
 				"options": [{
-					"text": "Hur",
+					"text": "Ah!",
 					"link": null
 				}, {
-					"text": "Dur",
+					"text": "That's an alien...",
 					"link": null
 				}]
 			}]
@@ -144,16 +250,28 @@
 		"observatory": {
 			"character": "astronaut1",
 			"entryPoint":0,
-			"dialogue": [{
-				"message": "Muh?",
+			"dialogue": [
+				{
+				"message": "Hi! My name's Kyle but everyone around here calls me\nthe astro-nut because I really want to be an astronaut.",
 				"options": [{
-					"text": "Hur",
-					"link": null
+					"text": "Oh ok",
+					"link": 1
 				}, {
-					"text": "Dur",
-					"link": null
+					"text": "I'm the new dev",
+					"link": 1
 				}]
+			},
+			{
+			"message": "I'd love to chat but I'm busy waiting here in case they\nneed an astronaut.",
+			"options": [{
+				"text": "Ok buddy",
+				"link": -1
+			}, {
+				"text": "Good luck",
+				"link": -1
 			}]
+		}
+		]
 		}
 	}
 }

@@ -56,19 +56,7 @@ var Room = new Phaser.Class({
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
       this.map.on('pointerout', function(){this.map.setTint(0xffffff);}, this)
       this.map.on('pointerdown', function(){
-        // Ugly code to increment hour by one between scenes, do better?
-        var newHour = parseInt(this.time.slice(0,2))+1;
-        if (newHour > 17) {
-          // Do something at the end of the day
-          this.scene.start("Credits",{});
-        } else {
-          if (newHour < 10) {
-          // Pad single digits with a leading zero
-          newHour = "0" + newHour;
-        }
-        this.time = newHour + ":00";
-        this.scene.start("Map",{day:this.day,time:this.time,room:this.room});
-        }
+        this.updateTime(1);
       }, this);
 
       this.map.visible = false;
@@ -97,6 +85,21 @@ var Room = new Phaser.Class({
       this.optionText2.setText(this.dialogue[this.storyIndex].options[1].text);
     },
     update: function() {},
+    updateTime: function(duration) {
+      // Ugly code to increment hour by one between scenes, do better?
+      var newHour = parseInt(this.time.slice(0,2))+duration;
+      if (newHour > 17) {
+        // Do something at the end of the day
+        this.scene.start("Credits",{});
+      } else {
+        if (newHour < 10) {
+        // Pad single digits with a leading zero
+        newHour = "0" + newHour;
+        }
+      }
+      this.time = newHour + ":00";
+      this.scene.start("Map",{day:this.day,time:this.time,room:this.room});
+    },
     endConversation: function() {
       // Hide all the conversation UI elements and show map button
       this.map.visible = true;
