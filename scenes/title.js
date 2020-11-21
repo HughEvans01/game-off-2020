@@ -16,7 +16,7 @@ var Title = new Phaser.Class({
       this.button.on('pointerover', function(){this.button.setTint(0xf0ff00);}, this)
       this.button.on('pointerout', function(){this.button.setTint(0xffffff);}, this)
       this.button.on('pointerdown', function(){
-        this.scene.start("Loading",{day:"Monday",time:"09:00",room:"conferenceRoom"});
+        this.scene.start("Loading",{day:"Monday",time:new Date('August 19, 1975 09:00:00'),room:"conferenceRoom"});
       }, this);
     },
     update: function() {}

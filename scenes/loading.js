@@ -5,19 +5,25 @@ var Loading = new Phaser.Class({
     },
     init: function(data) {
       this.day = data.day;
-      this.time = data.time;
+      this.currentTime = data.time;
       this.room = data.room;
     },
     preload: function() {},
     create: function() {
 
+      var timeText = this.currentTime.toTimeString().slice(0,5);
+
       this.add.text(200, 200, this.day, { fontSize: '100px', fill: '#ffffff' });
-      this.add.text(300, 300, this.time, { fontSize: '60px', fill: '#ffffff' });
+      this.add.text(300, 300, timeText , { fontSize: '60px', fill: '#ffffff' });
 
       if (this.room === 'serverRoom') {
-          setTimeout(() => {  this.scene.start("Minigame",{day:this.day,time:this.time,room:this.room}); }, 2000);
+          this.time.delayedCall(2000, (func) => {
+            this.scene.start("Minigame",{day:this.day,time:this.currentTime,room:this.room})
+          } );
       } else {
-          setTimeout(() => {  this.scene.start("Room",{day:this.day,time:this.time,room:this.room}); }, 2000);
+          this.time.delayedCall(2000, (func) => {
+            this.scene.start("Room",{day:this.day,time:this.currentTime,room:this.room})
+          });
       }
     },
     update: function() {}

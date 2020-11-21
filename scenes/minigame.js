@@ -35,30 +35,20 @@ var Minigame = new Phaser.Class({
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
       this.map.on('pointerout', function(){this.map.setTint(0xffffff);}, this)
       this.map.on('pointerdown', function(){
-        this.updateTime(2);
-      }, this);
-    },
-    updateTime: function(duration) {
-      // Ugly code to increment hour by one between scenes, do better?
-      var newHour = parseInt(this.currentTime.slice(0,2))+duration;
-      if (newHour > 17) {
-        // Do something at the end of the day
-        this.scene.start("Credits",{});
-      } else {
-        if (newHour < 10) {
-        // Pad single digits with a leading zero
-        newHour = "0" + newHour;
+        this.currentTime.setHours( this.currentTime.getHours() + 2);
+        if (this.currentTime.getHours() < 15) {
+          this.scene.start("Map",{day:this.day,time:this.currentTime,room:this.room});
+        } else {
+          this.scene.start("Credits",{});
         }
-      }
-      this.currentTime = newHour + ":00";
-      this.scene.start("Map",{day:this.day,time:this.currentTime,room:this.room});
+      }, this);
     },
     // Setup game timers and win conditions
     startGame: function() {
       this.map.visible = false;
       this.bugs = [];
       this.spawnTimer = this.time.addEvent({delay: 500,  callback: this.spawnBugs, callbackScope: this,  repeat: 32});
-      this.gameTimer = this.time.delayedCall(16000, (a) => {
+      this.gameTimer = this.time.delayedCall(16000, (func) => {
         this.spawnTimer.remove();
         this.map.visible = true;
       });
