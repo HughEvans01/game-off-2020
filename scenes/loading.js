@@ -8,6 +8,8 @@ var Loading = new Phaser.Class({
       this.currentTime = data.time;
       this.room = data.room;
       this.characterOpinions = data.opinions;
+      this.rocketProgress=data.progress;
+      console.log("loading",data.progress)
     },
     preload: function() {},
     create: function() {
@@ -23,14 +25,16 @@ var Loading = new Phaser.Class({
             this.scene.start("Minigame",{day:this.day,
                                          time:this.currentTime,
                                          room:this.room,
-                                         opinions:this.characterOpinions})});
+                                         opinions:this.characterOpinions,
+                                         progress:this.rocketProgress})});
       // Otherwise switch to the room scene
       } else {
           this.time.delayedCall(2000, (func) => {
             this.scene.start("Room",{day:this.day,
                                      time:this.currentTime,
                                      room:this.room,
-                                     opinions:this.characterOpinions})});
+                                     opinions:this.characterOpinions,
+                                     progress:this.rocketProgress})});
       }
     },
     update: function() {}

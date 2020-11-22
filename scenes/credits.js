@@ -5,6 +5,8 @@ var Credits = new Phaser.Class({
     },
     init: function(data) {
       this.characterOpinions=data.opinions;
+      this.rocketProgress=data.progress;
+      console.log("credits",data.progress)
     },
     preload: function() {
       this.load.image('wedding', './assets/weddingCredit.png');
@@ -21,6 +23,9 @@ var Credits = new Phaser.Class({
 
     },
     create: function() {
+
+      console.log("rocket progress",this.rocketProgress)
+      console.log("characterOpinions",this.characterOpinions)
 
       /* Need to add an edge case for when no charcters like player */
 
@@ -39,6 +44,13 @@ var Credits = new Phaser.Class({
         }
       }
 
+      // ROCKET BLOWS UP
+      //OR
+      //ROCKET LAUNCHES
+
+      //BAD ENDING
+      //OR
+      // GOOD ENDING
       this.add.image(400, 300, 'wedding');
       this.add.image(320, 270, partner.name); // Bride
       this.add.image(440, 230, 'player'); // Groom

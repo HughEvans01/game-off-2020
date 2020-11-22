@@ -8,6 +8,8 @@ var Room = new Phaser.Class({
       this.currentTime = data.time;
       this.room = data.room;
       this.characterOpinions = data.opinions;
+      this.rocketProgress=data.progress;
+      console.log("room",data.progress)
     },
     preload: function() {
       this.load.image('noon', './assets/noon.png');
@@ -61,9 +63,11 @@ var Room = new Phaser.Class({
           this.scene.start("Map",{day:this.day,
                                   time:this.currentTime,
                                   room:this.room,
-                                  opinions:this.characterOpinions});
+                                  opinions:this.characterOpinions,
+                                  progress:this.rocketProgress});
         } else {
-          this.scene.start("Credits",{opinions:this.characterOpinions});
+          this.scene.start("Credits",{opinions:this.characterOpinions,
+                                      progress:this.rocketProgress});
         }
         this.currentTime.setHours( this.currentTime.getHours() + 1);
       }, this);

@@ -5,9 +5,11 @@ var Map = new Phaser.Class({
     },
     init: function(data) {
       this.day = data.day;
-      this.time = data.time;
+      this.currentTime = data.time;
       this.room = data.room;
       this.characterOpinions = data.opinions;
+      this.rocketProgress=data.progress;
+      console.log("map",data.progress)
     },
     preload: function() {
       this.load.image('mapScreen', './assets/mapScreen.png');
@@ -42,17 +44,33 @@ var Map = new Phaser.Class({
           /* Server room button links to a different scene to the rest so
           I implmented it differently, yes I know it is ugly */
           this.serverRoom = this.add.sprite(667,196,'serversIcon').setInteractive();
-          this.serverRoom.on('pointerover', function(){this.serverRoom.setTint(0xff8f00);}, this)
-          this.serverRoom.on('pointerout', function(){this.serverRoom.setTint(0xffffff);}, this)
+          this.serverRoom.on('pointerover', function(){
+            this.serverRoom.setTint(0xff8f00);}, this)
+
+          this.serverRoom.on('pointerout', function(){
+            this.serverRoom.setTint(0xffffff);}, this)
+
           this.serverRoom.on('pointerdown', function(){
-            this.scene.start("Loading",{day:this.day,time:this.time,room:"serverRoom",opinions:this.characterOpinions});
+            this.scene.start("Loading",{day:this.day,
+                                        time:this.currentTime,
+                                        room:"serverRoom",
+                                        opinions:this.characterOpinions,
+                                        progress:this.rocketProgress});
           }, this);
         } else {
           this.rooms[nextRoom] = this.add.sprite(x, y, icon).setInteractive();
-          this.rooms[nextRoom].on('pointerover', function(){this.rooms[nextRoom].setTint(0xff8f00);}, this)
-          this.rooms[nextRoom].on('pointerout', function(){this.rooms[nextRoom].setTint(0xffffff);}, this)
+          this.rooms[nextRoom].on('pointerover', function(){
+            this.rooms[nextRoom].setTint(0xff8f00);}, this)
+
+          this.rooms[nextRoom].on('pointerout', function(){
+            this.rooms[nextRoom].setTint(0xffffff);}, this)
+
           this.rooms[nextRoom].on('pointerdown', function(){
-            this.scene.start("Loading",{day:day,time:time,room:nextRoom,opinions:this.characterOpinions});
+            this.scene.start("Loading",{day:day,
+                                        time:this.currentTime,
+                                        room:nextRoom,
+                                        opinions:this.characterOpinions,
+                                        progress:this.rocketProgress});
           }, this);
         }
       }

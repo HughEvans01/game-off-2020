@@ -27,7 +27,8 @@ var Title = new Phaser.Class({
       this.scene.start("Loading",{day:"Monday",
                                   time:new Date('August 19, 1975 09:00:00'),
                                   room:"conferenceRoom",
-                                  opinions:characterOpinions});
+                                  opinions:characterOpinions,
+                                  progress:0});
       }, this);
     },
     update: function() {}

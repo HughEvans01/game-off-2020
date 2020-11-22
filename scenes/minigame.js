@@ -8,6 +8,8 @@ var Minigame = new Phaser.Class({
       this.currentTime = data.time;
       this.room = data.room;
       this.characterOpinions = data.opinions;
+      this.rocketProgress=data.progress;
+      console.log("minigame",data.progress)
     },
     preload: function() {
       this.load.image('metalFloor', './assets/metalFloor.png');
@@ -40,9 +42,11 @@ var Minigame = new Phaser.Class({
           this.scene.start("Map",{day:this.day,
                                   time:this.currentTime,
                                   room:this.room,
-                                  opinions:this.characterOpinions});
+                                  opinions:this.characterOpinions,
+                                  progress:this.rocketProgress});
         } else {
-          this.scene.start("Credits",{opinions:this.characterOpinions});
+          this.scene.start("Credits",{opinions:this.characterOpinions,
+                                      progress:this.rocketProgress});
         }
         this.currentTime.setHours( this.currentTime.getHours() + 2);
       }, this);
@@ -55,6 +59,7 @@ var Minigame = new Phaser.Class({
       this.gameTimer = this.time.delayedCall(16000, (func) => {
         this.spawnTimer.remove();
         this.map.visible = true;
+        this.rocketProgress++;
       });
     },
     // Spawns clickable bugs
