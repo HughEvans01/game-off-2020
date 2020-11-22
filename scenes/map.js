@@ -8,7 +8,6 @@ var Map = new Phaser.Class({
       this.time = data.time;
       this.room = data.room;
       this.characterOpinions = data.opinions;
-      console.log("map",this.characterOpinions)
     },
     preload: function() {
       this.load.image('mapScreen', './assets/mapScreen.png');

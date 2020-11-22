@@ -1,7 +1,7 @@
 {
 	"Monday": {
 		"conferenceRoom": {
-			"character": "lincoln1",
+			"character": "lincoln",
 			"entryPoint":0,
 			"dialogue": [{
 					"message": "Welcome to Moonshot Inc. I'm Lincoln Rust the CEO\nand owner. How was your journey in?",
@@ -102,7 +102,7 @@
 			]
 		},
 		"storageRoom": {
-			"character": "bort1",
+			"character": "bort",
 			"entryPoint":0,
 			"dialogue": [
 				{
@@ -168,7 +168,7 @@
 		]
 		},
 		"labRoom": {
-			"character": "marjot1",
+			"character": "marjot",
 			"entryPoint":0,
 			"dialogue": [
 				{
@@ -234,7 +234,7 @@
 			]
 		},
 		"workshop": {
-			"character": "susan1",
+			"character": "susan",
 			"entryPoint":0,
 			"dialogue": [
 				{
@@ -276,7 +276,7 @@
 		]
 		},
 		"containment": {
-			"character": "alien1",
+			"character": "alien",
 			"entryPoint":0,
 			"dialogue": [{
 				"message": "Muh?",
@@ -292,7 +292,7 @@
 			}]
 		},
 		"observatory": {
-			"character": "astronaut1",
+			"character": "astronaut",
 			"entryPoint":0,
 			"dialogue": [
 				{

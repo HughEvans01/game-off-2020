@@ -8,7 +8,6 @@ var Room = new Phaser.Class({
       this.currentTime = data.time;
       this.room = data.room;
       this.characterOpinions = data.opinions;
-      console.log("room",this.characterOpinions)
     },
     preload: function() {
       this.load.image('noon', './assets/noon.png');
@@ -48,7 +47,7 @@ var Room = new Phaser.Class({
 
       this.add.image(400, 300, 'noon');
       this.add.image(400, 300, this.room);
-      this.add.image(400, 425, this.character);
+      this.add.image(400, 425, this.character+"1");
 
       if (this.room === "containment") {
         this.add.image(400,300, "bars")

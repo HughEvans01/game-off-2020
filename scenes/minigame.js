@@ -8,7 +8,6 @@ var Minigame = new Phaser.Class({
       this.currentTime = data.time;
       this.room = data.room;
       this.characterOpinions = data.opinions;
-      console.log("minigame",this.characterOpinions)
     },
     preload: function() {
       this.load.image('metalFloor', './assets/metalFloor.png');

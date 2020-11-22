@@ -8,7 +8,6 @@ var Loading = new Phaser.Class({
       this.currentTime = data.time;
       this.room = data.room;
       this.characterOpinions = data.opinions;
-      console.log("loading",this.characterOpinions)
     },
     preload: function() {},
     create: function() {
