@@ -7,6 +7,8 @@ var Map = new Phaser.Class({
       this.day = data.day;
       this.time = data.time;
       this.room = data.room;
+      this.characterOpinions = data.opinions;
+      console.log("map",this.characterOpinions)
     },
     preload: function() {
       this.load.image('mapScreen', './assets/mapScreen.png');
@@ -19,7 +21,7 @@ var Map = new Phaser.Class({
       this.load.image('telescopeIcon', './assets/telescopeIcon.png');
       this.load.image('workshopIcon', './assets/workshopIcon.png');
 
-      this.rooms = {};
+      this.rooms = {}; //Store references to room buttons on map
     },
     create: function() {
       this.add.image(400, 300, 'mapScreen');
@@ -44,14 +46,14 @@ var Map = new Phaser.Class({
           this.serverRoom.on('pointerover', function(){this.serverRoom.setTint(0xff8f00);}, this)
           this.serverRoom.on('pointerout', function(){this.serverRoom.setTint(0xffffff);}, this)
           this.serverRoom.on('pointerdown', function(){
-            this.scene.start("Loading",{"day":this.day,"time":this.time,"room":'serverRoom'});
+            this.scene.start("Loading",{day:this.day,time:this.time,room:"serverRoom",opinions:this.characterOpinions});
           }, this);
         } else {
           this.rooms[nextRoom] = this.add.sprite(x, y, icon).setInteractive();
           this.rooms[nextRoom].on('pointerover', function(){this.rooms[nextRoom].setTint(0xff8f00);}, this)
           this.rooms[nextRoom].on('pointerout', function(){this.rooms[nextRoom].setTint(0xffffff);}, this)
           this.rooms[nextRoom].on('pointerdown', function(){
-            this.scene.start("Loading",{"day":day,"time":time,"room":nextRoom});
+            this.scene.start("Loading",{day:day,time:time,room:nextRoom,opinions:this.characterOpinions});
           }, this);
         }
       }

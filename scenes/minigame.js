@@ -7,6 +7,8 @@ var Minigame = new Phaser.Class({
       this.day = data.day;
       this.currentTime = data.time;
       this.room = data.room;
+      this.characterOpinions = data.opinions;
+      console.log("minigame",this.characterOpinions)
     },
     preload: function() {
       this.load.image('metalFloor', './assets/metalFloor.png');
@@ -35,12 +37,15 @@ var Minigame = new Phaser.Class({
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
       this.map.on('pointerout', function(){this.map.setTint(0xffffff);}, this)
       this.map.on('pointerdown', function(){
-        this.currentTime.setHours( this.currentTime.getHours() + 2);
-        if (this.currentTime.getHours() < 15) {
-          this.scene.start("Map",{day:this.day,time:this.currentTime,room:this.room});
+        if (this.currentTime.getHours() < 16) {
+          this.scene.start("Map",{day:this.day,
+                                  time:this.currentTime,
+                                  room:this.room,
+                                  opinions:this.characterOpinions});
         } else {
-          this.scene.start("Credits",{});
+          this.scene.start("Credits",{opinions:this.characterOpinions});
         }
+        this.currentTime.setHours( this.currentTime.getHours() + 2);
       }, this);
     },
     // Setup game timers and win conditions

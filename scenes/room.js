@@ -7,6 +7,8 @@ var Room = new Phaser.Class({
       this.day = data.day;
       this.currentTime = data.time;
       this.room = data.room;
+      this.characterOpinions = data.opinions;
+      console.log("room",this.characterOpinions)
     },
     preload: function() {
       this.load.image('noon', './assets/noon.png');
@@ -56,12 +58,15 @@ var Room = new Phaser.Class({
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
       this.map.on('pointerout', function(){this.map.setTint(0xffffff);}, this)
       this.map.on('pointerdown', function(){
-        this.currentTime.setHours( this.currentTime.getHours() + 1);
-        if (this.currentTime.getHours() < 15) {
-          this.scene.start("Map",{day:this.day,time:this.currentTime,room:this.room});
+        if (this.currentTime.getHours() < 16) {
+          this.scene.start("Map",{day:this.day,
+                                  time:this.currentTime,
+                                  room:this.room,
+                                  opinions:this.characterOpinions});
         } else {
-          this.scene.start("Credits",{});
+          this.scene.start("Credits",{opinions:this.characterOpinions});
         }
+        this.currentTime.setHours( this.currentTime.getHours() + 1);
       }, this);
 
       this.map.visible = false;
@@ -106,6 +111,21 @@ var Room = new Phaser.Class({
       index, negative numbers link to the next dialogue object at that next
       but only the next time you talk to that character, and a null value ends
       the conversation instantly. This could probably be done better */
+
+      // Apply character's reaction to option to their opinion of the player
+      var effect = this.dialogue[this.storyIndex].options[option].reaction;
+      var characterOpinion = this.characterOpinions[this.character];
+      // Opinion is null if character has not been introduced
+      if ( characterOpinion === null){
+        // Introduction
+        characterOpinion = 0 + effect;
+      } else {
+        // Normal conversation
+        characterOpinion += effect;
+      }
+      this.characterOpinions[this.character] = characterOpinion;
+
+      // Figure out what to do next in conversation
       var nextIndex = this.dialogue[this.storyIndex].options[option].link;
 
       if (nextIndex === null) {
@@ -118,7 +138,7 @@ var Room = new Phaser.Class({
         this.optionText2.setText(this.dialogue[this.storyIndex].options[1].text);
 
       } else if (Math.sign(nextIndex) < 0) {
-        // If there is a new entry point at the next index load it
+        // If there is a new entry point at the next index set it to that
         this.story[this.day][this.room].entryPoint = Math.abs(nextIndex);
         this.endConversation();
       }

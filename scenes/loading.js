@@ -7,6 +7,8 @@ var Loading = new Phaser.Class({
       this.day = data.day;
       this.currentTime = data.time;
       this.room = data.room;
+      this.characterOpinions = data.opinions;
+      console.log("loading",this.characterOpinions)
     },
     preload: function() {},
     create: function() {
@@ -16,14 +18,20 @@ var Loading = new Phaser.Class({
       this.add.text(200, 200, this.day, { fontSize: '100px', fill: '#ffffff' });
       this.add.text(300, 300, timeText , { fontSize: '60px', fill: '#ffffff' });
 
+      // Switch to minigame scene if the server room is visted
       if (this.room === 'serverRoom') {
           this.time.delayedCall(2000, (func) => {
-            this.scene.start("Minigame",{day:this.day,time:this.currentTime,room:this.room})
-          } );
+            this.scene.start("Minigame",{day:this.day,
+                                         time:this.currentTime,
+                                         room:this.room,
+                                         opinions:this.characterOpinions})});
+      // Otherwise switch to the room scene
       } else {
           this.time.delayedCall(2000, (func) => {
-            this.scene.start("Room",{day:this.day,time:this.currentTime,room:this.room})
-          });
+            this.scene.start("Room",{day:this.day,
+                                     time:this.currentTime,
+                                     room:this.room,
+                                     opinions:this.characterOpinions})});
       }
     },
     update: function() {}
