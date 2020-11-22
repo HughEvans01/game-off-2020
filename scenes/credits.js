@@ -6,11 +6,11 @@ var Credits = new Phaser.Class({
     init: function(data) {
       this.characterOpinions=data.opinions;
       this.rocketProgress=data.progress;
-      console.log("credits",data.progress)
     },
     preload: function() {
       this.load.image('wedding', './assets/weddingCredit.png');
       this.load.image('family', './assets/familyCredit.png');
+        this.load.image('grave1', './assets/grave1.png');
 
       this.load.image('alien', './assets/alienHead.png');
       this.load.image('babyAlien', './assets/babyAlienHead.png');
@@ -45,24 +45,31 @@ var Credits = new Phaser.Class({
       }
 
       // ROCKET BLOWS UP
-      //OR
-      //ROCKET LAUNCHES
+      if (this.rocketProgress < 5) {
+
+      } else {
+        //ROCKET LAUNCHES
+      }
+
 
       //BAD ENDING
-      //OR
-      // GOOD ENDING
-      this.add.image(400, 300, 'wedding');
-      this.add.image(320, 270, partner.name); // Bride
-      this.add.image(440, 230, 'player'); // Groom
+      if (partner.name === "") {
+        this.add.image(400, 300, 'grave1');
+      } else {
+        // GOOD ENDING
+        this.add.image(400, 300, 'wedding');
+        this.add.image(320, 270, partner.name); // Bride
+        this.add.image(440, 230, 'player'); // Groom
 
-      this.time.delayedCall(10000, (func) => {
-        this.add.image(400, 300, 'family');
-        this.add.image(260, 230, partner.name); // Mother
-        this.add.image(520, 230, 'player'); // Father
-        if (partner.name === 'alien') {
-          this.add.image(425, 230, 'babyAlien');
-        }
-      });
+        this.time.delayedCall(10000, (func) => {
+          this.add.image(400, 300, 'family');
+          this.add.image(260, 230, partner.name); // Mother
+          this.add.image(520, 230, 'player'); // Father
+          if (partner.name === 'alien') {
+            this.add.image(425, 230, 'babyAlien');
+          }
+        });
+      }
 
       // Add a "The end ?" bit after this
     },

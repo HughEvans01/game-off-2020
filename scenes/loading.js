@@ -9,7 +9,6 @@ var Loading = new Phaser.Class({
       this.room = data.room;
       this.characterOpinions = data.opinions;
       this.rocketProgress=data.progress;
-      console.log("loading",data.progress)
     },
     preload: function() {},
     create: function() {

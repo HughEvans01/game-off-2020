@@ -9,7 +9,6 @@ var Minigame = new Phaser.Class({
       this.room = data.room;
       this.characterOpinions = data.opinions;
       this.rocketProgress=data.progress;
-      console.log("minigame",data.progress)
     },
     preload: function() {
       this.load.image('metalFloor', './assets/metalFloor.png');
