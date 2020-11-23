@@ -4,7 +4,6 @@ var Map = new Phaser.Class({
         Phaser.Scene.call(this, { 'key': 'Map' });
     },
     init: function(data) {
-      this.day = data.day;
       this.currentTime = data.time;
       this.room = data.room;
       this.characterOpinions = data.opinions;
@@ -26,16 +25,16 @@ var Map = new Phaser.Class({
     create: function() {
       this.add.image(400, 300, 'mapScreen');
 
-      this.createButton(127,390,'boxIcon',this.day,this.time,'storageRoom')
-      this.createButton(567,198,'ceoIcon',this.day,this.time,'conferenceRoom')
-      this.createButton(140,120,'labIcon',this.day,this.time,'labRoom')
-      this.createButton(155,222,'scpIcon',this.day,this.time,'containment')
-      this.createButton(340,150,'telescopeIcon',this.day,this.time,'observatory')
-      this.createButton(255,435,'workshopIcon',this.day,this.time,'workshop')
-      this.createButton(667,196,'serversIcon',this.day,this.time,'serverRoom')
+      this.createButton(127,390,'boxIcon',this.time,'storageRoom')
+      this.createButton(567,198,'ceoIcon',this.time,'conferenceRoom')
+      this.createButton(140,120,'labIcon',this.time,'labRoom')
+      this.createButton(155,222,'scpIcon',this.time,'containment')
+      this.createButton(340,150,'telescopeIcon',this.time,'observatory')
+      this.createButton(255,435,'workshopIcon',this.time,'workshop')
+      this.createButton(667,196,'serversIcon',this.time,'serverRoom')
 
     },
-    createButton(x,y,icon,day,time,nextRoom) {
+    createButton(x,y,icon,time,nextRoom) {
       if (this.room===nextRoom) {
         this.rooms[nextRoom] = this.add.sprite(x, y, 'hereIcon').setInteractive();
       } else {
@@ -50,8 +49,7 @@ var Map = new Phaser.Class({
             this.serverRoom.setTint(0xffffff);}, this)
 
           this.serverRoom.on('pointerdown', function(){
-            this.scene.start("Loading",{day:this.day,
-                                        time:this.currentTime,
+            this.scene.start("Loading",{time:this.currentTime,
                                         room:"serverRoom",
                                         opinions:this.characterOpinions,
                                         progress:this.rocketProgress});
@@ -65,8 +63,7 @@ var Map = new Phaser.Class({
             this.rooms[nextRoom].setTint(0xffffff);}, this)
 
           this.rooms[nextRoom].on('pointerdown', function(){
-            this.scene.start("Loading",{day:day,
-                                        time:this.currentTime,
+            this.scene.start("Loading",{time:this.currentTime,
                                         room:nextRoom,
                                         opinions:this.characterOpinions,
                                         progress:this.rocketProgress});

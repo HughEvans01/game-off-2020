@@ -4,7 +4,6 @@ var Room = new Phaser.Class({
         Phaser.Scene.call(this, { 'key': 'Room' });
     },
     init: function(data) {
-      this.day = data.day;
       this.currentTime = data.time;
       this.room = data.room;
       this.characterOpinions = data.opinions;
@@ -28,27 +27,46 @@ var Room = new Phaser.Class({
       this.load.image('marjot1', './assets/marjot1.png');
       this.load.image('astronaut1', './assets/astronaut1.png');
 
+      this.load.image('lincoln2', './assets/lincoln2.png');
+      this.load.image('bort2', './assets/bort2.png');
+      this.load.image('alien2', './assets/alien2.png');
+      this.load.image('susan2', './assets/susan2.png');
+      this.load.image('marjot2', './assets/marjot2.png');
+      this.load.image('astronaut2', './assets/astronaut2.png');
+
+      this.load.image('lincoln3', './assets/lincoln3.png');
+      this.load.image('bort3', './assets/bort3.png');
+      this.load.image('alien3', './assets/alien3.png');
+      this.load.image('susan3', './assets/susan3.png');
+      this.load.image('marjot3', './assets/marjot3.png');
+      this.load.image('astronaut3', './assets/astronaut3.png');
+
       this.load.image('speechBubble1', './assets/speechBubble1.png');
       this.load.image('speechBubble2', './assets/speechBubble2.png');
 
       this.load.image('mapIcon', './assets/mapIcon.png');
 
-      this.load.json('story', './story.json');
+      this.load.json('Monday', './story/monday.json');
+      this.load.json('Tuesday', './story/tuesday.json');
+      this.load.json('Wednesday', './story/wednesday.json');
+      this.load.json('Thursday', './story/thursday.json');
+      this.load.json('Friday', './story/friday.json');
     },
     create: function() {
-      this.story = this.cache.json.get('story');
+      const days = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
+      this.story = this.cache.json.get(days[this.currentTime.getDay()]);
 
       this.messageText;
       this.optionText1;
       this.optionText2;
 
-      this.dialogue = this.story[this.day][this.room].dialogue;
-      this.character = this.story[this.day][this.room].character;
-      this.storyIndex = this.story[this.day][this.room].entryPoint;
+      this.dialogue = this.story[this.room].dialogue;
+      this.character = this.story[this.room].character;
+      this.storyIndex = this.story[this.room].entryPoint;
 
       this.add.image(400, 300, 'noon');
       this.add.image(400, 300, this.room);
-      this.add.image(400, 425, this.character+"1");
+      this.characterSprite = this.add.image(400, 425, this.character+"1");
 
       if (this.room === "containment") {
         this.add.image(400,300, "bars")
@@ -58,17 +76,24 @@ var Room = new Phaser.Class({
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
       this.map.on('pointerout', function(){this.map.setTint(0xffffff);}, this)
       this.map.on('pointerdown', function(){
+        const days = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
         if (this.currentTime.getHours() < 16) {
-          this.scene.start("Map",{day:this.day,
-                                  time:this.currentTime,
+          this.scene.start("Map",{time:this.currentTime,
                                   room:this.room,
                                   opinions:this.characterOpinions,
                                   progress:this.rocketProgress});
-        } else {
+          this.currentTime.setHours( this.currentTime.getHours() + 2);
+        } else if (this.currentTime.getDay() > 3){
           this.scene.start("Credits",{opinions:this.characterOpinions,
                                       progress:this.rocketProgress});
+        } else {
+          this.currentTime.setUTCDate(this.currentTime.getUTCDate()+1);
+          this.currentTime.setHours(9);
+          this.scene.start("Map",{time:this.currentTime,
+                                  room:this.room,
+                                  opinions:this.characterOpinions,
+                                  progress:this.rocketProgress});
         }
-        this.currentTime.setHours( this.currentTime.getHours() + 1);
       }, this);
 
       this.map.visible = false;
@@ -124,6 +149,17 @@ var Room = new Phaser.Class({
       } else {
         // Normal conversation
         characterOpinion += effect;
+        // Update character's sprite to match reaction
+        if (Math.sign(effect) > 0) {
+          // Happy reaction
+          this.characterSprite.setTexture(this.character+"2");
+        } else if (Math.sign(effect) < 0) {
+          // Angry reaction
+          this.characterSprite.setTexture(this.character+"3");
+        } else {
+          this.characterSprite.setTexture(this.character+"1");
+        }
+
       }
       this.characterOpinions[this.character] = characterOpinion;
 
@@ -141,7 +177,7 @@ var Room = new Phaser.Class({
 
       } else if (Math.sign(nextIndex) < 0) {
         // If there is a new entry point at the next index set it to that
-        this.story[this.day][this.room].entryPoint = Math.abs(nextIndex);
+        this.story[this.room].entryPoint = Math.abs(nextIndex);
         this.endConversation();
       }
     }
