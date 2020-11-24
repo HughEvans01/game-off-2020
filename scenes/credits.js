@@ -10,7 +10,14 @@ var Credits = new Phaser.Class({
     preload: function() {
       this.load.image('wedding', './assets/weddingCredit.png');
       this.load.image('family', './assets/familyCredit.png');
-        this.load.image('grave1', './assets/grave1.png');
+      this.load.image('grave1', './assets/grave1.png');
+      this.load.image('launchPad', './assets/launchPad.png');
+      this.load.image('mushroomCloud', './assets/mushroomCloud.png');
+      this.load.image('space', './assets/space1.png');
+      this.load.image('rocket1', './assets/rocket1.png');
+      this.load.image('rocket2', './assets/rocket2.png');
+
+      this.load.image('retryButton', './assets/retryButton.png');
 
       this.load.image('alien', './assets/alienHead.png');
       this.load.image('babyAlien', './assets/babyAlienHead.png');
@@ -23,9 +30,6 @@ var Credits = new Phaser.Class({
 
     },
     create: function() {
-
-      console.log("rocket progress",this.rocketProgress)
-      console.log("characterOpinions",this.characterOpinions)
 
       /* Need to add an edge case for when no charcters like player */
 
@@ -44,24 +48,49 @@ var Credits = new Phaser.Class({
         }
       }
 
+      // ROCKET LAUNCH
+      this.add.image(400, 300, 'launchPad');
+      this.rocket = this.add.image(400, 310, 'rocket2');
+      // COUNT DOWN
+      var count = 10;
+      this.countdown = this.add.text(400, 300, count, { fontSize: '450px', fill: '#000000' }).setOrigin(0.5);
+      this.spawnTimer = this.time.addEvent({delay: 1000,  callback: (func) => {
+        this.countdown.setText(count);
+        count--;
+      }, callbackScope: this,  repeat: 9});
       // ROCKET BLOWS UP
       if (this.rocketProgress < 5) {
-
+        this.time.delayedCall(11000, (func) => {
+          this.countdown.visible=false;
+          this.add.image(400, 300, 'launchPad');
+          this.add.image(400, 310, 'mushroomCloud');
+          partner.name = "";
+        });
       } else {
         //ROCKET LAUNCHES
+        this.time.delayedCall(11000, (func) => {
+          this.countdown.visible=false;
+          this.add.image(400, 300, 'space1');
+          this.add.image(400, 300, 'rocket1');
+        });
       }
 
-
+      //FINAL ENDING
       //BAD ENDING
       if (partner.name === "") {
-        this.add.image(400, 300, 'grave1');
+        this.time.delayedCall(15000, (func) => {
+          this.add.image(400, 300, 'grave1');
+        });
       } else {
         // GOOD ENDING
-        this.add.image(400, 300, 'wedding');
-        this.add.image(320, 270, partner.name); // Bride
-        this.add.image(440, 230, 'player'); // Groom
+        this.time.delayedCall(15000, (func) => {
+          this.add.image(400, 300, 'wedding');
+          this.add.image(320, 270, partner.name); // Bride
+          this.add.image(440, 230, 'player'); // Groom
+        });
 
-        this.time.delayedCall(10000, (func) => {
+
+        this.time.delayedCall(20000, (func) => {
           this.add.image(400, 300, 'family');
           this.add.image(260, 230, partner.name); // Mother
           this.add.image(520, 230, 'player'); // Father
@@ -72,6 +101,27 @@ var Credits = new Phaser.Class({
       }
 
       // Add a "The end ?" bit after this
+      this.time.delayedCall(20500, (func) => {
+        this.retry = this.add.sprite(760,560,'retryButton').setInteractive();
+        this.retry.on('pointerover', function(){
+          this.retry.setTint(0xff8f00);}, this)
+
+        this.retry.on('pointerout', function(){
+          this.retry.setTint(0xffffff);}, this)
+
+        var characterOpinions = {"alien": null,
+                                 "astronaut": null,
+                                 "lincoln": null,
+                                 "marjot": null,
+                                 "susan": null,
+                                 "bort": null};
+
+        this.retry.on('pointerdown', function(){
+          this.scene.start("Loading",{time:new Date('August 17, 1975 09:00:00'),
+                                      room:"conferenceRoom",
+                                      opinions:characterOpinions,
+                                      progress:0});}, this)
+      });
     },
     update: function() {}
 });

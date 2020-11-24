@@ -81,6 +81,7 @@ var Minigame = new Phaser.Class({
             this.spawnTimer.delay=this.spawnTimer.delay-5;
             this.bugs[bugId].setTexture('splat').setTint(color.color);
             this.time.delayedCall(300, (a) => {this.bugs[bugId].destroy()});
+            this.rocketProgress++;
           }, this);
     },
     update: function() {}
