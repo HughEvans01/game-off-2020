@@ -3,99 +3,51 @@
 			"character": "lincoln",
 			"entryPoint":0,
 			"dialogue": [{
-					"message": "Tuesday",
+					"message": "Glad to see you're still in one piece. How was your\nfirst day? Find everything alright?",
 					"options": [{
-						"text": "My journey was fine, thanks.",
-						"link": 1,
-						"reaction": 0
+						"text": "It was great,\nhow are you?",
+						"link": 2,
+						"reaction": 2
 					}, {
-						"text": "I was attacked\nby a swarm of bees.",
+						"text": "In one-",
 						"link": 1,
-						"reaction": 0
+						"reaction": -5
 					}]
 				},
 				{
-					"message": "Awesome. Would you like me to give you a quick rundown\nof your new role here?",
+					"message": "I'm glad you're settling in. Let me know if you need\nanything. Just get that engine debugged!",
 					"options": [{
-						"text": "No [SKIP TUTORIAL]",
-						"link": -6,
+						"text": "Thanks",
+						"link": -1,
 						"reaction": 0
 					}, {
-						"text": "Sure",
-						"link": 2,
+						"text": "See you around\nLincoln!",
+						"link": -1,
 						"reaction": 1
 					}]
 				},
 				{
-					"message": "We need the code for our new rocket debugged before\nthe launch test on Friday: that's where you come in.",
+					"message": "I'm doing swell, I'm excited to show off the new\nrocket this Friday to our new investors.",
 					"options": [{
-						"text": "Got it",
-						"link": 4,
-						"reaction": 0
+						"text": "Glad to hear\nit.",
+						"link": 1,
+						"reaction": 5
 					}, {
-						"text": "Bugs?",
+						"text": "Investors?",
 						"link": 3,
 						"reaction": 0
 					}]
 				},
 				{
-					"message": "Our server is full of bugs and we need you to hit all\nthose bugs with a mallet. Smush em' good.",
+					"message": "Between you and me we're hanging by a thread\nunless this test goes well we're finished!",
 					"options": [{
-						"text": "I don't think\nthat's how-",
-						"link": 4,
+						"text": "Then why are\nyou swell-",
+						"link": 1,
 						"reaction": -1
 					}, {
-						"text": "Bring it on",
-						"link": 4,
-						"reaction": 5
-					}]
-				},
-				{
-					"message": "You'll work from the admin building. It's marked on\nyour map. Oh and make sure you only travel by map.",
-					"options": [{
-						"text": "Okay",
-						"link": 6,
+						"text": "Uh oh",
+						"link": 1,
 						"reaction": 0
-					}, {
-						"text": "Travel by what?",
-						"link": 5,
-						"reaction": 0
-					}]
-				},
-				{
-					"message": "Some of our interns broke lose and overan the\ngrounds. Select a location on your map to travel there.",
-					"options": [{
-						"text": "Got it",
-						"link": 6,
-						"reaction": 1
-					}, {
-						"text": "Interns?",
-						"link": 7,
-						"reaction": -1
-					}]
-				},
-				{
-					"message": "Feel free to explore and meet your new colleagues\njust make sure you get that engine debugged by Friday!",
-					"options": [{
-						"text": "I won't let\nyou down!",
-						"link": -6,
-						"reaction": 0
-					}, {
-						"text": "I'm still\nconfused",
-						"link": -6,
-						"reaction": 0
-					}]
-				},
-				{
-					"message": "Ah that reminds me, stay out of the containment area\nin the R&D block. I don't want to replace another dev.",
-					"options": [{
-						"text": "Replace another-",
-						"link": 6,
-						"reaction": -1
-					}, {
-						"text": "You didn't-",
-						"link": 6,
-						"reaction": -1
 					}]
 				}
 			]
@@ -105,62 +57,38 @@
 			"entryPoint":0,
 			"dialogue": [
 				{
-				"message": "Who are you and what are you doing in my warehouse?",
+				"message": "Hello debugger comrade! How are you today?",
 				"options": [{
-					"text": "Who are you?",
+					"text": "I'm good thanks\nBort, and you?",
 					"link": 1,
-					"reaction": -10
+					"reaction": 1
 				}, {
-					"text": "I'm the new debugger,\nI just came over to say hi.",
+					"text": "Fine",
 					"link": 2,
-					"reaction": 1
-					}]
-				},
-				{
-				"message": "I am Herbort Kowalczyk and I am the manager of this\ndepartment! I'll ask again, who are you? ",
-				"options": [{
-					"text": "I'm new here, sorry.\nJust taking a look around",
-					"link": -3,
-					"reaction": 1
-				}, {
-					"text": "I'm the new debugger,\nI just came over to say hi.",
-					"link": -3,
-					"reaction": 1
-					}]
-				},
-				{
-				"message": "My name is Hebort but everyone here calls me Bort. I am\n the manager of this department",
-				"options": [{
-					"text": "What is this department?",
-					"link": 4,
-					"reaction": 2
-				}, {
-					"text": "Nice to meet you Bort.",
-					"link": -3,
-					"reaction": 3
-					}]
-				},
-				{
-				"message": "Debugger comrade! Can I help you with anything?",
-				"options": [{
-					"text": "Just passing.",
-					"link": null,
-					"reaction": 0
-				}, {
-					"text": "Not today Bort.",
-					"link": null,
 					"reaction": 0
 					}]
 				},
 				{
-				"message": "This is the storage department, here we store essential\nscomponents for rocket assembly.",
+				"message": "I am very well! Very busy ahead of launch though I\nmust return to my work.",
 				"options": [{
-					"text": "Makes sense.",
-					"link": -3,
+					"text": "See you later\nBort!",
+					"link": -1,
+					"reaction": 1
+				}, {
+					"text": "Bye",
+					"link": -1,
+					"reaction": 0
+					}]
+				},
+				{
+				"message": "I am very busy ahead of launch though I\nmust return to my work.",
+				"options": [{
+					"text": "Bye",
+					"link": -2,
 					"reaction": 0
 				}, {
-					"text": "OK",
-					"link": -3,
+					"text": "Ok",
+					"link": -2,
 					"reaction": 0
 					}]
 				}
@@ -171,62 +99,38 @@
 			"entryPoint":0,
 			"dialogue": [
 				{
-				"message": "You must be the new debugger. The bugs didn't escape\nfrom this lab, that was just a rumor.",
+				"message": "How's it going bug boy? Splat any good ones today?\n",
 				"options": [{
-					"text": "Why do you have\nbugs in here?",
+					"text": "Good thanks\nMarjot.",
 					"link": 2,
 					"reaction": 1
 				}, {
-					"text": "Uh OK?",
+					"text": "Bug boy?",
 					"link": 1,
 					"reaction": 0
 					}]
 				},
 				{
-				"message": "My name's Marjot by the way. I'm the lead researcher\nworking on samples returned from our space missions.",
+				"message": "Whilst nicknames are more of an art than a science\nI still consider them part of the job.",
 				"options": [{
-					"text": "Samples?",
-					"link": 3,
+					"text": "OK",
+					"link": 2,
+					"reaction": 0
+				}, {
+					"text": "Okay bug\nreleaser.",
+					"link": 2,
+					"reaction": 5
+					}]
+				},
+				{
+				"message": "Good luck with your debugging! I'd better get back to\nwork.",
+				"options": [{
+					"text": "Bye Marjot",
+					"link": -2,
 					"reaction": 1
 				}, {
-					"text": "Cool",
-					"link": 4,
-					"reaction": 5
-					}]
-				},
-				{
-				"message": "I have a colony of Isoptera, I love those little guys:\nthey're way more fun than an ant farm any day.",
-				"options": [{
-					"text": "Neat",
-					"link": 1,
-					"reaction": 5
-				}, {
-					"text": "Gross",
-					"link": 1,
-					"reaction": -5
-					}]
-				},
-				{
-				"message": "Lunar rocks, martian rocks, glowing rocks... you get\nthe idea. Oh, and the big guy next door in containment.",
-				"options": [{
-					"text": "Sounds like a lot of rocks",
-					"link": 4,
-					"reaction": 2
-				}, {
-					"text": "Big guy-",
-					"link": 4,
-					"reaction": -2
-					}]
-				},
-				{
-				"message": "Good luck with your debugging! I'd better get back to\nwork. Got a whole shipment of samples to process.",
-				"options": [{
-					"text": "Thanks",
-					"link": -4,
-					"reaction": 0
-				}, {
-					"text": "See you later",
-					"link": -4,
+					"text": "See you\naround",
+					"link": -2,
 					"reaction": 0
 					}]
 				}
@@ -237,39 +141,27 @@
 			"entryPoint":0,
 			"dialogue": [
 				{
-				"message": "Oh hey you're that new dev! How's debugging going?\nAs you can see we're nearly ready for launch here.",
+				"message": "Too busy to chat bug boy. Come back later.",
 				"options": [{
-					"text": "I'm... still\nlearning the ropes",
+					"text": "Bye",
 					"link": 1,
 					"reaction": 1
 				}, {
-					"text": "It's going great",
+					"text": "See you\naround then",
 					"link": 1,
 					"reaction": 5
 					}]
 				},
 				{
-				"message": "My name Susan by the way. I'm the lead engineer\non Moonshot's latest generation of space craft.",
+				"message": "We're moving the engine stages ready for assembly\nso don't hang around, it's not safe.",
 				"options": [{
-					"text": "That's cool",
-					"link": -2,
+					"text": "Thanks for\nthe heads up",
+					"link": -1,
 					"reaction": 3
 				}, {
-					"text": "Nice to meet you Susan",
-					"link": -2,
+					"text": "Got it",
+					"link": -1,
 					"reaction": 1
-					}]
-				},
-				{
-				"message": "Make sure you get that server debugged by Friday\nit's a critical part of the new engine test.",
-				"options": [{
-					"text": "Will do",
-					"link": -2,
-					"reaction": 0
-				}, {
-					"text": "No problem",
-					"link": -2,
-					"reaction": 0
 					}]
 				}
 		]
@@ -278,15 +170,15 @@
 			"character": "alien",
 			"entryPoint":0,
 			"dialogue": [{
-				"message": "Muh?",
+				"message": "Muh!",
 				"options": [{
-					"text": "Ah!",
+					"text": "Hey there\nbig buy.",
 					"link": null,
-					"reaction": -1
+					"reaction": 5
 				}, {
-					"text": "That's an alien...",
+					"text": "What is\nthat thing?",
 					"link": null,
-					"reaction": 0
+					"reaction": -5
 				}]
 			}]
 		},
@@ -295,13 +187,13 @@
 			"entryPoint":0,
 			"dialogue": [
 				{
-				"message": "Hi! My name's Kyle but everyone around here calls me\nthe astro-nut because I really want to be an astronaut.",
+				"message": "Spaaaaaace! Spaaaaaaaaaace! Oh hi! I didn't\nsee you there!",
 				"options": [{
-					"text": "Oh ok",
+					"text": "Hi Kyle",
 					"link": 1,
 					"reaction": 0
 				}, {
-					"text": "I'm the new dev",
+					"text": "Spaaaace!",
 					"link": 1,
 					"reaction": 0
 				}]
