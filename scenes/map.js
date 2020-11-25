@@ -20,6 +20,8 @@ var Map = new Phaser.Class({
       this.load.image('telescopeIcon', './assets/telescopeIcon.png');
       this.load.image('workshopIcon', './assets/workshopIcon.png');
 
+      this.load.audio('clickSound','./assets/sounds/click.m4a');
+
       this.rooms = {}; //Store references to room buttons on map
     },
     create: function() {
@@ -49,6 +51,7 @@ var Map = new Phaser.Class({
             this.serverRoom.setTint(0xffffff);}, this)
 
           this.serverRoom.on('pointerdown', function(){
+            this.sound.play('clickSound');
             this.scene.start("Loading",{time:this.currentTime,
                                         room:"serverRoom",
                                         opinions:this.characterOpinions,
@@ -63,6 +66,7 @@ var Map = new Phaser.Class({
             this.rooms[nextRoom].setTint(0xffffff);}, this)
 
           this.rooms[nextRoom].on('pointerdown', function(){
+            this.sound.play('clickSound');
             this.scene.start("Loading",{time:this.currentTime,
                                         room:nextRoom,
                                         opinions:this.characterOpinions,

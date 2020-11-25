@@ -51,6 +51,8 @@ var Room = new Phaser.Class({
       this.load.json('Wednesday', './story/wednesday.json');
       this.load.json('Thursday', './story/thursday.json');
       this.load.json('Friday', './story/friday.json');
+
+      this.load.audio('clickSound','./assets/sounds/click.m4a');
     },
     create: function() {
       const days = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
@@ -64,6 +66,8 @@ var Room = new Phaser.Class({
       this.character = this.story[this.room].character;
       this.storyIndex = this.story[this.room].entryPoint;
 
+      this.characterOpinion = this.characterOpinions[this.character];
+
       this.add.image(400, 300, 'noon');
       this.add.image(400, 300, this.room);
       this.characterSprite = this.add.image(400, 425, this.character+"1");
@@ -76,6 +80,7 @@ var Room = new Phaser.Class({
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
       this.map.on('pointerout', function(){this.map.setTint(0xffffff);}, this)
       this.map.on('pointerdown', function(){
+        this.sound.play('clickSound');
         const days = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
         if (this.currentTime.getHours() < 16) {
           this.scene.start("Map",{time:this.currentTime,
@@ -104,6 +109,7 @@ var Room = new Phaser.Class({
       this.option1.on('pointerover', function(){this.option1.setTint(0xff8f00);}, this)
       this.option1.on('pointerout', function(){this.option1.setTint(0xffffff);}, this)
       this.option1.on('pointerdown', function(){
+        this.sound.play('clickSound');
         this.nextDialogue(0);
       }, this);
 
@@ -112,11 +118,22 @@ var Room = new Phaser.Class({
       this.option2.on('pointerout', function(){this.option2.setTint(0xffffff);}, this)
       this.option2.on('pointerdown', function(){
         this.nextDialogue(1);
+        this.sound.play('clickSound');
       }, this);
 
       this.messageText = this.add.text(16, 16, 'Hello world', { fontSize: '24px', fill: '#000' });
       this.optionText1 = this.add.text(16, 116, 'Hello world', { fontSize: '24px', fill: '#000' });
       this.optionText2 = this.add.text(416, 116, 'Hello world', { fontSize: '24px', fill: '#000' });
+
+      // If characters hasn't yet been introduced use introduction from Monday
+      if (this.characterOpinion === null) {
+        this.story = this.cache.json.get("Monday");
+
+        this.dialogue = this.story[this.room].dialogue;
+        this.character = this.story[this.room].character;
+        this.storyIndex = this.story[this.room].entryPoint;
+      }
+
       this.messageText.setText(this.dialogue[this.storyIndex].message);
       this.optionText1.setText(this.dialogue[this.storyIndex].options[0].text);
       this.optionText2.setText(this.dialogue[this.storyIndex].options[1].text);
@@ -141,14 +158,15 @@ var Room = new Phaser.Class({
 
       // Apply character's reaction to option to their opinion of the player
       var effect = this.dialogue[this.storyIndex].options[option].reaction;
-      var characterOpinion = this.characterOpinions[this.character];
       // Opinion is null if character has not been introduced
-      if ( characterOpinion === null){
+      if ( this.characterOpinion === null){
         // Introduction
-        characterOpinion = 0 + effect;
+
+        this.characterOpinion = 0 + effect;
       } else {
         // Normal conversation
-        characterOpinion += effect;
+        this.characterOpinion += effect;
+
         // Update character's sprite to match reaction
         if (Math.sign(effect) > 0) {
           // Happy reaction
@@ -161,7 +179,7 @@ var Room = new Phaser.Class({
         }
 
       }
-      this.characterOpinions[this.character] = characterOpinion;
+      this.characterOpinions[this.character] = this.characterOpinion;
 
       // Figure out what to do next in conversation
       var nextIndex = this.dialogue[this.storyIndex].options[option].link;

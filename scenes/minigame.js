@@ -17,6 +17,11 @@ var Minigame = new Phaser.Class({
       this.load.image('server', './assets/server.png');
       this.load.image('bug1', './assets/bug1.png');
       this.load.image('splat', './assets/splat.png');
+
+      this.load.audio('clickSound','./assets/sounds/click.m4a');
+      this.load.audio('splat1','./assets/sounds/splat1.wav');
+      this.load.audio('splat2','./assets/sounds/splat2.wav');
+      this.load.audio('splat3','./assets/sounds/splat3.wav');
     },
     create: function() {
 
@@ -28,6 +33,7 @@ var Minigame = new Phaser.Class({
       this.mallet.on('pointerover', function(){this.mallet.setTint(0xff8f00);}, this)
       this.mallet.on('pointerout', function(){this.mallet.setTint(0xffffff);}, this)
       this.mallet.on('pointerdown', function(){
+        this.sound.play('clickSound');
         this.startGame();
         this.mallet.visible = false;
       }, this);
@@ -36,6 +42,7 @@ var Minigame = new Phaser.Class({
       this.map.on('pointerover', function(){this.map.setTint(0xff8f00);}, this)
       this.map.on('pointerout', function(){this.map.setTint(0xffffff);}, this)
       this.map.on('pointerdown', function(){
+        this.sound.play('clickSound');
         const days = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
         if (this.currentTime.getHours() < 16) {
           this.scene.start("Map",{time:this.currentTime,
@@ -78,6 +85,7 @@ var Minigame = new Phaser.Class({
 
           this.bugs[bugId] = this.add.sprite(x, y, 'bug1').setInteractive();
           this.bugs[bugId].on('pointerdown', function(){
+            this.sound.play('splat'+Phaser.Math.Between(1, 3));
             this.spawnTimer.delay=this.spawnTimer.delay-5;
             this.bugs[bugId].setTexture('splat').setTint(color.color);
             this.time.delayedCall(300, (a) => {this.bugs[bugId].destroy()});

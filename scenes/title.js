@@ -8,6 +8,8 @@ var Title = new Phaser.Class({
       this.load.image('space1', './assets/space1.png');
       this.load.image('title', './assets/title.png');
       this.load.image('start', './assets/start.png');
+
+      this.load.audio('clickSound','./assets/sounds/click.m4a');
     },
     create: function() {
       this.add.image(400, 300, 'space1');
@@ -24,6 +26,7 @@ var Title = new Phaser.Class({
       this.button.on('pointerover', function(){this.button.setTint(0xf0ff00);}, this);
       this.button.on('pointerout', function(){this.button.setTint(0xffffff);}, this);
       this.button.on('pointerdown', function(){
+      this.sound.play('clickSound');
       this.scene.start("Loading",{time:new Date('August 17, 1975 09:00:00'),
                                   room:"conferenceRoom",
                                   opinions:characterOpinions,
