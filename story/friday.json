@@ -130,7 +130,7 @@
 				"message": "I'm hiding here because they kicked me out again\nearlier. This sucks!",
 				"options": [{
 					"text": "Oh ok",
-					"link": nu,
+					"link": null,
 					"reaction": 0
 				}, {
 					"text": "Wait do you\nnot work here?",
