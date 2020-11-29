@@ -6,11 +6,11 @@
 					"message": "I'M ON A CALL! GET OUT!",
 					"options": [{
 						"text": "Sorry boss",
-						"link": 0,
+						"link": null,
 						"reaction": -4
 					}, {
 						"text": "Whoops",
-						"link": 0,
+						"link": null,
 						"reaction": -5
 					}]
 				}
@@ -66,11 +66,11 @@
 				"message": "Can't talk right now bug boy. I've got to prep some\nsample containers for tommorow.",
 				"options": [{
 					"text": "See you later",
-					"link": 0,
+					"link": null,
 					"reaction": 0
 				}, {
 					"text": "Bye",
-					"link": 0,
+					"link": null,
 					"reaction": 0
 					}]
 				}
@@ -142,12 +142,12 @@
 				{
 				"message": "They aren't letting me on the rocket tommorow.",
 				"options": [{
-					"text": "Oh Kyle",
-					"link": 0,
+					"text": "Oh Kyle, I'm so\n sorry",
+					"link": null,
 					"reaction": 0
 				}, {
 					"text": "That's probably\nfor the best",
-					"link": 0,
+					"link": null,
 					"reaction": 0
 				}]
 			}
