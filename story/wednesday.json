@@ -6,11 +6,11 @@
 					"message": "Heard a lot of banging from next door this week,\ndebugging going well?",
 					"options": [{
 						"text": "It's going great.",
-						"link": 0,
+						"link": null,
 						"reaction": 0
 					}, {
 						"text": "I was attacked\nby a swarm of bugs.",
-						"link": 0,
+						"link": null,
 						"reaction": 0
 					}]
 				}
@@ -36,7 +36,7 @@
 				"message": "I am glad you are making good progress\nlaunch date is coming up fast after all.",
 				"options": [{
 					"text": "Don't remind me.",
-					"link": 0,
+					"link": null,
 					"reaction": 1
 				}, {
 					"text": "I'll have it done\nin no time.",
@@ -154,11 +154,11 @@
 				"message": "Hi! My name's Kyle but everyone around here calls me\nthe astro-nut because I really want to be an astronaut.",
 				"options": [{
 					"text": "We've already\nmet, Kyle",
-					"link": 0,
+					"link": null,
 					"reaction": 0
 				}, {
 					"text": "Ok Buddy",
-					"link": 0,
+					"link": null,
 					"reaction": 0
 				}]
 			}
